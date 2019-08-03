@@ -30,9 +30,7 @@ if (settings.heavy != true) {
     'getpeerinfo',
     'gettxoutsetinfo',
     'getmasternodecount',
-    'getmasternodecountonline',
-    'masternode',
-    'masternodelist',
+    'listmasternodes',
   ]);
 } else {
   // enable additional heavy api calls
