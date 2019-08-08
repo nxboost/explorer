@@ -26,20 +26,25 @@ block content
             td(rowspan=2 width=10)
               img(height='50%' src='/qr/#{address.a_id}')
             if settings.show_sent_received == true
-              td <b> #{settings.locale.total_received} (#{settings.symbol}) </b>
+              if !address.fee
+                td <b> #{settings.locale.total_received} (#{settings.symbol}) </b>
             if address.a_id !== 'coinbase'
               if settings.show_sent_received == true
                 td <b> #{settings.locale.total_sent} (#{settings.symbol}) </b>
-              td <b> #{settings.locale.rl_balance} (#{settings.symbol}) </b>
+              if !address.fee
+                td <b> #{settings.locale.rl_balance} (#{settings.symbol}) </b>
           tr
             if settings.show_sent_received == true
-              td + #{received.toFixed(8)}
+              if !address.fee
+                td + #{received.toFixed(8)}
             if address.a_id !== 'coinbase'
               if settings.show_sent_received == true
                 td - #{sent.toFixed(8)}
-                td = #{balance}
+                if !address.fee
+                  td = #{balance}
               if settings.show_sent_received == false
-                td #{balance}
+                if !address.fee
+                  td #{balance}
     .panel.panel-default.hidden-xs
       .panel-heading
         strong #{settings.locale.ex_latest_transactions}

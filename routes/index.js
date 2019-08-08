@@ -118,15 +118,12 @@ function route_get_address(res, hash, count) {
       }, function(){
 
         // hack to support numbers longer than 15 digits.
-        var balance = new BigInteger(address.balance);
-        var viewBalance = balance.divide(100000000);
-        var balanceRemain = new BigNumber(balance.toString().substr(
-          viewBalance.toString().length));
+        var balance = address.balance / 100000000;
 
         res.render('address', {
           active: 'address',
           address: address,
-          balance: viewBalance.toString()+'.'+balanceRemain.toString(),
+          balance: balance.toFixed(8).toString(),
           txs: txs
         });
       });

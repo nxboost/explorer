@@ -86,7 +86,7 @@ block market_view
               th.hidden-xs #{settings.locale.mkt_time_stamp}
           tbody
             each order in marketdata.data.history
-              if order.ordertype == 'Buy'
+              if order.ordertype == 'buy'
                 tr.success
                   td.hidden-xs
                     =order.ordertype

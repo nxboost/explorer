@@ -10,30 +10,38 @@ tbody
       td.hidden-xs #{time} 
       td.hidden-xs
         a.mono(href='/tx/#{tx.txid}') #{tx.txid}
-      - var done = false
-      - var out = 0
-      - var vin = 0
-      each r in tx.vout 
-        if r.addresses == address.a_id
-          - out = r.amount
-      each s in tx.vin
-        if s.addresses == address.a_id
-          - vin = s.amount
-      if out > 0 && vin > 0
-        td.info
-          - var amount = (out - vin) / 100000000
-          if amount < 0
-            - amount = amount * -1
-            | - #{amount.toFixed(8)}
-          else if amount > 0
+        - var done = false
+        - var out = 0
+        - var vin = 0
+        - var fee = false
+        each r in tx.vout 
+          if r.addresses === address.a_id
+            if r.fee
+              - fee = true
+            else
+              - out = r.amount
+        each s in tx.vin
+          if s.addresses === address.a_id
+            - vin = s.amount
+        if fee
+          td.text-right.danger
+            - var amount = -tx.total / 100000000
+            | - #{amount.toFixed(8)}          
+        else if out > 0 && vin > 0
+          td.info
+            - var amount = (out - vin) / 100000000
+            if amount < 0
+              - amount = amount * -1
+              | - #{amount.toFixed(8)}
+            else if amount > 0
+              | + #{amount.toFixed(8)}
+            else
+              | #{amount.toFixed(8)}
+        else if out > 0
+          td.text-right.success
+            - var amount = out / 100000000
             | + #{amount.toFixed(8)}
-          else
-            | #{amount.toFixed(8)}
-      else if out > 0
-        td.text-right.success
-          - var amount = out / 100000000
-          | + #{amount.toFixed(8)}
-      else
-        td.text-right.danger
-          - var amount = vin / 100000000
-          | - #{amount.toFixed(8)}
+        else
+          td.text-right.danger
+            - var amount = vin / 100000000
+            | - #{amount.toFixed(8)}
