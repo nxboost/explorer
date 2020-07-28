@@ -35,19 +35,23 @@ mongoose.connect(dbString, { useNewUrlParser: true }, function(err) {
         db.find_peer(address, function(peer) {
           if (peer) {
             // peer already exists
+            peer.protocol = body[i].version;
+            peer.version = body[i].subver.replace('/', '').replace('/', '');
+            peer.save();
             loop.next();
           } else {
-            //request({uri: 'http://freegeoip.net/json/' + address, json: true}, function (error, response, geo) {
-            request({uri: 'http://api.ipstack.com/' + address + '?access_key=' + settings.ipstackapi_key + '&output=json', json: true}, function (error, response, geo) {
-		          db.create_peer({
-                address: address,
-                protocol: body[i].version,
-                version: body[i].subver.replace('/', '').replace('/', ''),
-                country: geo.country_name
-              }, function(){
-                loop.next();
-              });
-            });
+              if (body[i].version !== 0) {
+                request({uri: 'http://api.ipstack.com/' + address + '?access_key=' + settings.ipstackapi_key + '&output=json', json: true}, function (error, response, geo) {
+                    db.create_peer({
+                        address: address,
+                        protocol: body[i].version,
+                        version: body[i].subver.replace('/', '').replace('/', ''),
+                        country: geo.country_name
+                    }, function(){
+                        loop.next();
+                    });
+                });
+              }
           }
         });
       }, function() {

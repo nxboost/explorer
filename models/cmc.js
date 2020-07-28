@@ -13,7 +13,7 @@ var CmcSchema = new Schema({
   percent_change_1h: { type: String },
   percent_change_24h: { type: String },
   percent_change_7d: { type: String },
-  last_updated: { type: Number }
+  last_updated: { type: String }
 });
 
 module.exports = mongoose.model('cmcs', CmcSchema);

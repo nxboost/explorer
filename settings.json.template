@@ -5,25 +5,25 @@
 */
 {
   // name your instance!
-  "title": "NULLIQUIDUS",
+  "title": "sQuorum",
 
   "address": "127.0.0.1:3001",
 
   // coin name
-  "coin": "NulleX",
+  "coin": "SQR",
 
   // coin symbol
-  "symbol": "NLX",
-
+  "symbol": "SQR",
+  "baseType": "pivx",
   // logo
-  "logo": "/images/nullex-logo.png",
+  "logo": "/images/logo.png",
 
   // favicon
   "favicon": "public/favicon.ico",
-  
+
   // home link (valid options are: title, coin, logo)
-  "homelink":  "coin",
-  
+  "homelink":  "title",
+
   // home link logo height (value in px, only valid if using homelink = 'logo')
   "logoheight":  50,
 
@@ -47,19 +47,20 @@
   },
 
   //update script settings
-  "update_timeout": 10,
+  "update_timeout": 1,
+  "index_timeout": 1,
   "check_timeout": 250,
 
   // wallet settings
   "wallet": {
     "host": "localhost",
-    "port": 46201,
-    "user": "nullexrpc",
+    "port": 9019,
+    "user": "heliumrpc",
     "pass": "qn6&z**@$N7$2677=#S&7-53N2&7&l&g"
   },
 
   // confirmations
-  "confirmations": 40,
+  "confirmations": 6,
 
   // language settings
   "locale": "locale/en.json",
@@ -84,20 +85,29 @@
     "search": true,
     "movement": true,
     "network": true,
+    "masternodes": true,
+    "coininfo": true,
+    "coinmarketcap":true,
     "networkpnl": 1,
     "difficultypnl": 2,
     "masternodespnl": 3,
     "coinsupplypnl": 4,
-    "pricepnl": 5
+    "pricepnl": 0
   },
-
+  "ipstackapi_key": "ipstackapi_key",
   // index page (valid options for difficulty are POW, POS or Hybrid)
   "index": {
     "show_hashrate": true,
+    "show_coin_supply": true,
     "difficulty": "POS",
     "last_txs": 100
   },
-
+  "coininfo": {
+    "basic_info_links": [],
+    "masternode_required": 1000,
+    "block_time_sec": 60,
+    "block_reward_mn": 0
+  },
   // ensure links on API page are valid
   "api": {
     "blockindex": 6415,
@@ -110,13 +120,17 @@
   //supported markets: bittrex, poloniex, yobit, empoex, bleutrade, cryptopia, ccex, coinexchange
   //default market is loaded by default and determines last price in header
   "markets": {
-    "coin": "NLX",
+    "coin": "HLM",
     "exchange": "BTC",
-    "enabled": ["cryptopia"],
+    "enabled": ["crex"],
     "cryptopia_id": "4552",
     "ccex_key" : "Get-Your-Own-Key",
     "coinexchange_id": "",
-    "default": "cryptopia"
+    "default": "crex"
+  },
+  "coinmarketcap": {
+    "ticker": "HLM",
+    "api_key": "api_key"
   },
 
   // richlist/top100 settings
@@ -130,9 +144,9 @@
   // low flag: greater than this value flagged yellow
   // high flag: greater than this value flagged red
   "movement": {
-    "min_amount": 100,
-    "low_flag": 1000,
-    "high_flag": 5000
+    "min_amount": 1000,
+    "low_flag": 5000,
+    "high_flag": 10000
   },
 
   // twitter, facebook, googleplus, bitcointalk, github, slack, discord, telegram, reddit, youtube, website
@@ -149,8 +163,8 @@
   "website": "your-full-website-url",
 
   //genesis
-  "genesis_tx": "3bcd33b7d38538c060ba28f02dc983e364bb7b84303b505c216c2c0fb935568e",
-  "genesis_block": "000006cacaa033d02e73700344ec669171a2fa30cf310861cf46f8d92641450a",
+  "genesis_tx": "edee755717c4de66ce52056e36ae0f6e9f0269667fd8a06e3c5367588cbfadbd",
+  "genesis_block": "0000033346b0b31697bcd178789fe1d6d10f96a7fd46d74fbf647d5ea3757348",
 
   //heavy (enable/disable additional heavy features)
   "heavy": false,
@@ -167,7 +181,7 @@
   // HEAVY: retreive from heavys getsupply api call
   // BALANCES : total of all address balances
   // TXOUTSET : retreive from gettxoutsetinfo api call
-  "supply": "TXOUTSET",
+  "supply": "GETINFO",
 
   // how to acquire network hashrate
   // getnetworkhashps: uses getnetworkhashps api call, returns in GH/s
@@ -177,7 +191,7 @@
   // nethash unitd: sets nethash API return units
   // valid options: "P" (PH/s), "T" (TH/s), "G" (GH/s), "M" (MH/s), "K" (KH/s)
   "nethash_units": "G",
-  
+
   // simple Cross-Origin Resource Sharing (CORS) support
   // enabling this feature will add a new output header to all requests like this: Access-Control-Allow-Origin: <corsorigin>
   // corsorigin "*" will allow any origin to access the requested resource while specifying any other value for corsorigin will allow cross-origin requests only when the request is made from a source that matches the corsorigin filter

@@ -37,7 +37,11 @@ mongoose.connect(dbString, { useNewUrlParser: true }, function(err) {
           } else {
             //request({uri: 'http://freegeoip.net/json/' + address, json: true}, function (error, response, geo) {
 	    request({uri: 'http://api.ipstack.com/' + address + '?access_key=' + settings.ipstackapi_key + '&output=json', json: true}, function (error, response, geo) {
-              console.log('%s %s', address, geo.country_name);
+                try {
+                    console.log('%s %s', address, geo.country_name);
+                } catch(e) {
+                    geo.country_name = '';
+                }
               db.create_peer({
                 address: address,
                 protocol: body[i].version,

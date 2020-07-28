@@ -8,7 +8,7 @@ This project is a fork of [Ciquidus Explorer](https://github.com/suprnurd/ciquid
 ### Requires
 
 -  node.js >= 0.10.28
--  mongodb 2.6.x
+-  mongodb
 -  *coind
 
 ### Create database
@@ -87,6 +87,8 @@ sync.js (located in scripts/) is used for updating the local databases. This scr
     */1 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/sync.js index update > /dev/null 2>&1
     */2 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/sync.js market > /dev/null 2>&1
     */5 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/peers.js > /dev/null 2>&1
+    */60 * * * * cd /path/to/explorer && /usr/bin/nodejs scripts/sync.js cmc > /dev/null 2>&1
+    0 */24 * * * cd /path/to/explorer && /usr/bin/nodejs scripts/sync.js mnstats > /dev/null 2>&1
 
 ### Wallet
 
