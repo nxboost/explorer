@@ -5,9 +5,9 @@ block market_view
     .col-md-12  
       .panel.panel-default
         .panel-heading
-          strong #{settings.locale.coinexchange} - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
+          strong #{settings.locale.cryptopia} - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
           a(href='#')
-            span.fas.fa-chart-line.pull-right.view-chart-disabled.iquidus.market-toggle(data-toggle='tooltip', data-placement='bottom', title='#{settings.locale.mkt_no_chart}') 
+            span.fa.fa-line-chart.pull-right.view-chart-disabled.iquidus.market-toggle(data-toggle='tooltip', data-placement='bottom', title=settings.locale.mkt_no_chart) 
         table.table.table-bordered.summary-table 
           thead
             tr
@@ -26,11 +26,11 @@ block market_view
               td.hidden-xs #{marketdata.data.summary.bid}
               td.hidden-xs #{marketdata.data.summary.ask}
               td.hidden-xs #{marketdata.data.summary.last}
-              - var coinexchange_change =  parseFloat(marketdata.data.summary.change).toFixed(4);
-              if coinexchange_change >= 0
-                td.success +#{coinexchange_change} %
+              - var cryptopia_change =  (marketdata.data.summary.change).toFixed(4);
+              if cryptopia_change >= 0
+                td.success +#{cryptopia_change} %
               else
-                td.danger #{coinexchange_change} %
+                td.danger #{cryptopia_change} %
   .row
     .col-md-6.col-xs-12
       .panel.panel-default
@@ -86,7 +86,7 @@ block market_view
               th.hidden-xs #{settings.locale.mkt_time_stamp}
           tbody
             each order in marketdata.data.history
-              if order.ordertype == 'Buy'
+              if order.ordertype == 'buy'
                 tr.success
                   td.hidden-xs
                     =order.ordertype

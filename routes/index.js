@@ -213,8 +213,7 @@ router.get('/coininfo', function(req, res) {
 
   db.get_stats(settings.coin, function(stats){
     db.get_cmc(settings.coinmarketcap.ticker, function(cmc) {
-      lib.get_masternodecount(function(totalMnCount) {
-        lib.get_masternodeonlinecount(function(activeMnCount) {
+      lib.get_masternodecount(function(totalMnCount, activeMnCount) {
           db.get_latest_masternodestats(settings.symbol, function(mnStats) {
             var blocksPerDay = (60*60*24)/settings.coininfo.block_time_sec;
             var totalMnRewardsDay = settings.coininfo.block_reward_mn * blocksPerDay;
@@ -290,7 +289,6 @@ router.get('/coininfo', function(req, res) {
 
             res.render('coininfo', data);
           });
-        });
       });
     });
   });
@@ -408,8 +406,7 @@ router.get('/ext/summary', function(req, res) {
     lib.get_hashrate(function(hashrate) {
       lib.get_connectioncount(function(connections){
         lib.get_blockcount(function(blockcount) {
-          lib.get_masternodecount(function(masternodecount){
-            lib.get_masternodeonlinecount(function(masternodeonlinecount){
+           lib.get_masternodecount(function(masternodecount, masternodeonlinecount){
               db.get_cmc(settings.coinmarketcap.ticker, function(cmc){
                 db.get_stats(settings.coin, function (stats) {
                   if (hashrate == 'There was an error. Check your console.') {
@@ -432,7 +429,6 @@ router.get('/ext/summary', function(req, res) {
                   }]});
                 });
               });
-            });
           });
         });
       });
@@ -504,8 +500,7 @@ router.get('/ext/masternodes', function(req, res) {
 
 router.get('/ext/coindetails', function(req, res) {
   lib.get_blockcount(function(blockcount) {
-    lib.get_masternodecount(function(masternodecount){
-      lib.get_masternodeonlinecount(function(masternodeonlinecount){
+    lib.get_masternodecount(function(masternodecount, masternodeonlinecount){
         db.get_cmc(settings.coinmarketcap.ticker, function(cmc){
           db.get_stats(settings.coin, function (stats) {
             db.get_latest_masternodestats(settings.symbol, function(mnStats) {
@@ -547,7 +542,6 @@ router.get('/ext/coindetails', function(req, res) {
             });
           });
         });
-      });
     });
   });
 });

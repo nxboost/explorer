@@ -1,12 +1,13 @@
 extends layout
 
-block content   
+block content
   .col-md-12(style="margin-bottom: 4%")
     .panel.panel-default(style="background-color:transparent")
       .panel-heading
         strong #{settings.locale.coininfo_head}
       .panel-body
         .row
+         .row.text-center
           .col-md-3
             .panel.panel-default
               .panel-heading
@@ -20,7 +21,7 @@ block content
               .panel-body
                 .row
                   .col-md-4
-                    img(src='#{settings.logo}', style='margin:5px;height:128px;')
+                    img(src=settings.logo, style='margin:5px;height:128px;')
                   .col-md-4
                     h3 #{settings.coin} &nbsp(#{settings.symbol})
                     span #{lastPriceBtc} BTC
@@ -59,11 +60,11 @@ block content
                   .col-md-4.col-sm-4
                     .panel.panel-default.panel-summary
                       .panel-heading
-                        strong Masternodes 
+                        strong Masternodes
                       .panel-body(style="padding-top: 25px")
                         row.text-center
                           .col-md-12
-                            h1 #{totalMasternodes}            
+                            h1 #{totalMasternodes}
                             h3 Total Masternode Count
                   .col-md-4.col-sm-4
                     .panel.panel-default.panel-summary
@@ -82,7 +83,7 @@ block content
                           .col-md-12
                             h1 #{nodeWorthBtc} BTC
                             if nodeWorthUsd
-                              span  / $#{nodeWorthUsd}         
+                              span  / $#{nodeWorthUsd}
                             h3 CoinMarketCap Data
                 .row.info-row
                   .col-md-12(style='text-align: center;')
@@ -108,7 +109,7 @@ block content
                   .col-md-6.col-sm-6
                     .panel.panel-default.panel-summary
                       .panel-heading
-                        strong Monthly Reward    
+                        strong Monthly Reward
                       .panel-body(style="padding-top: 25px")
                         row.text-center
                           .col-md-12
@@ -126,4 +127,3 @@ block content
                   .row.earnings
                     .col-md-offset-5.text-left
                       em Calculations are based on real masternode payment data over the last 24h.
-

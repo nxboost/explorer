@@ -1,0 +1,61 @@
+extends layout
+mixin list(str, url)
+  li
+    p: strong #{str}
+    if block
+      block
+    p: a(href=url) #{address + url}
+block content
+  .col-md-12.col-xs-12
+    .panel.panel-default
+      .panel-heading
+        strong #{settings.locale.api_title}
+      .panel-body
+          p: em #{settings.locale.api_message}
+
+          hr/
+          h3 #{settings.locale.api_calls}
+          p: em Return data from coind
+          ul
+            +list('getdifficulty', '/api/getdifficulty')
+              p: em #{settings.locale.api_getdifficulty}
+            +list('getconnectioncount', '/api/getconnectioncount')
+              p: em #{settings.locale.api_getconnectioncount}
+            +list('getblockcount', '/api/getblockcount')
+              p: em #{settings.locale.api_getblockcount}
+            +list('getblockhash [index]', '/api/getblockhash?index=' + hashes.blockindex)
+              p: em #{settings.locale.api_getblockhash}
+            +list('getblock [hash]', '/api/getblock?hash=' + hashes.blockhash)
+              p: em #{settings.locale.api_getblock}
+            +list('getrawtransaction [txid] [decrypt]', '/api/getrawtransaction?txid=' + hashes.txhash + '&decrypt=1')
+              p: em #{settings.locale.api_getrawtransaction}
+            if settings.index.show_hashrate == true
+              +list('getnetworkhashps', '/api/getnetworkhashps')
+                p: em #{settings.locale.api_getnetworkhashps}
+
+          hr/
+          h3 Extended API
+          p: em Return data from local indexes
+          ul
+            +list('getmoneysupply', '/ext/getmoneysupply')
+              p: em Returns current money supply
+            +list('getdistribution', '/ext/getdistribution')
+              p: em Returns wealth distribution stats
+            +list('getaddress (/ext/getaddress/hash)', '/ext/getaddress/' + hashes.address)
+              p: em Returns information for given address
+            +list('getbalance (/ext/getbalance/hash)', '/ext/getbalance/' + hashes.address)
+              p: em Returns current balance of given address
+            +list('getlasttxs (/ext/getlasttxs/count/min)', '/ext/getlasttxs/10/100')
+              p: em Returns last [count] transactions greater than [min]
+              p: em Note: returned values are in satoshis
+
+          hr/
+          h3 Linking (GET)
+          p: em Linking to the block explorer
+          ul
+            +list('transaction (/tx/txid)', '/tx/' + hashes.txhash)
+            +list('block (/block/hash)', '/block/' + hashes.blockhash)
+            +list('address (/address/hash)', '/address/' + hashes.address)
+            +list('qrcode (/qr/hash)', '/qr/' + hashes.address)
+
+    .footer-padding

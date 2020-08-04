@@ -5,26 +5,26 @@ block content
   - var received = address.received / 100000000
   .col-xs-12.col-md-10.col-md-offset-1
     .panel.panel-default.panel-success
-      .panel-heading(style='position:relative;')        
+      .panel-heading(style='position:relative;')
         strong.mono #{address.a_id}
         if settings.labels[address.a_id]
-          if settings.labels[address.a_id].type  
-            label(class='label label-#{settings.labels[address.a_id].type} pull-right hidden-xs', style='margin-left:15px;')
+          if settings.labels[address.a_id].type
+            label(class='label label-' + settings.labels[address.a_id].type + ' pull-right hidden-xs', style='margin-left:15px;')
               =settings.labels[address.a_id].label
               if settings.labels[address.a_id].url
-                a(href='#{settings.labels[address.a_id].url}', target='_blank')
+                a(href=settings.labels[address.a_id].url, target='_blank')
                   span.fa.fa-question-circle(style='margin-left:5px;')
           else
-            label.label.label-default.pull-right.hidden-xs(style='margin-left:15px;') 
+            label.label.label-default.pull-right.hidden-xs(style='margin-left:15px;')
               =settings.labels[address.a_id].label
               if settings.labels[address.a_id].url
-                a(href='#{settings.labels[address.a_id].url}', target='_blank')
+                a(href=settings.labels[address.a_id].url, target='_blank')
                   span.fa.fa-question-circle(style='margin-left:5px;')
       table.table.table-bordered.table-striped.summary-table
         tbody
           tr
             td(rowspan=2 width=10)
-              img(height='50%' src='/qr/#{address.a_id}')
+              img(height='50%' src='/qr/' + address.a_id)
             if settings.show_sent_received == true
               if !address.fee
                 td <b> #{settings.locale.total_received} (#{settings.symbol}) </b>
@@ -49,5 +49,5 @@ block content
       .panel-heading
         strong #{settings.locale.ex_latest_transactions}
       table.table.table-bordered.table-striped.history-table
-        include ./includes/address_history.jade  
+        include ./includes/address_history.pug
     .footer-padding

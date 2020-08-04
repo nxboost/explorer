@@ -7,7 +7,7 @@
   // name your instance!
   "title": "sQuorum",
 
-  "address": "127.0.0.1:3001",
+  "address": "sqrexplorer.com",
 
   // coin name
   "coin": "SQR",
@@ -111,9 +111,9 @@
   // ensure links on API page are valid
   "api": {
     "blockindex": 6415,
-    "blockhash": "000000eb7e703c4a73d22c78b42333ba91cc5cb6cec0e54ddb22964fcbddc263",
-    "txhash": "5e412c52ab5595baa11c3bf9fbd3342a630016db5814e9ff30cd1514826a689c",
-    "address": "AXx1ePiu3jPHJjZ8HZtorxjQLpChtqgVUm"
+    "blockhash": "4a5a6668a2850eaab00abbc0407530ce3b7925225ca1d8aa66f595123f0d1986",
+    "txhash": "b144dfdef70cf8f2f4ca32d21cc22cbeb50b352420b355f8840aa20f66abab3c",
+    "address": "SjaG3EuufcMNPYFQvAXFTKHb5HiNM5cB31"
   },
 
   // market settings
